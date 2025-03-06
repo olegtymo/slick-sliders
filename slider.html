@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Slider with bar</title>
+
+    <!-- Slick Slider CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100dvh;
+            margin: 0;
+        }
+        .slider-wrapper{
+            max-width: 1440px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .custom-slider {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .custom-slider .custom-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .custom-slider .custom-slide span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30rem;
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            background-color: #0d95e8;
+            color: white;
+            font-weight: 700;
+            font-size: 5rem;
+        }
+
+        .slick-arrow:before {
+            color: #5b5151;
+        }
+
+
+        .progress-bar {
+            display: flex;
+            width: 30rem;
+            height: 6px;
+            position: relative;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .progress-bar__segment {
+            background: #0D95E8;
+            border: 0;
+            flex: 1;
+            height: 100%;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+
+        .progress-bar__segment:hover {
+            background: rgba(188, 155, 255, 0.7);
+        }
+
+        .progress-bar__indicator {
+            position: absolute;
+            top: -2px;
+            left: 0;
+            height: 10px;
+            width: 25%;
+            background: #00ff3b;
+            border-radius: 5px;
+            transition: left 1.5s cubic-bezier(0.0, 0.0, 0.1, 1.0);
+        }
+    </style>
+</head>
+<body>
+<div class="slider-wrapper">
+    <div class="custom-slider">
+        <div class="custom-slide"><span>1</span></div>
+        <div class="custom-slide"><span>2</span></div>
+        <div class="custom-slide"><span>3</span></div>
+        <div class="custom-slide"><span>4</span></div>
+        <div class="custom-slide"><span>5</span></div>
+        <div class="custom-slide"><span>6</span></div>
+    </div>
+</div>
+
+
+<script>
+    function initProgressBar($slider) {
+        var totalSlides = $slider.find('.slick-slide').not('.slick-cloned').length;
+        var progressBar = $('<div class="progress-bar"></div>');
+        var indicator = $('<div class="progress-bar__indicator"></div>');
+
+        for (let i = 0; i < totalSlides; i++) {
+            let segment = $('<button class="progress-bar__segment"></button>');
+            segment.on('click', function () {
+                $slider.slick('slickGoTo', i);
+            });
+            progressBar.append(segment);
+        }
+
+        progressBar.append(indicator);
+        $slider.after(progressBar);
+
+        var segmentWidth = 100 / totalSlides;
+
+        indicator.css({
+            'left': '0%',
+            'width': segmentWidth + '%'
+        });
+
+        $slider.on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+            indicator.css({
+                'left': (nextSlide * segmentWidth) + '%',
+                'width': segmentWidth + '%'
+            });
+        });
+    }
+
+    let $customSlider = $('.custom-slider');
+
+    $(document).ready(function () {
+        $customSlider.slick({
+            dots: false,
+            arrows: true,
+            infinite: true,
+            speed: 1500,
+            slidesToShow: 1,
+            adaptiveHeight: true
+        });
+
+        initProgressBar($customSlider);
+    });
+</script>
+
+
+</body>
+</html>
