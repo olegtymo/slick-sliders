@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Slider with bar</title>
+
+    <!-- Slick Slider CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+
+    <style>
+        body{
+            background:#ccc;
+        }
+        .main {
+            font-family:Arial;
+            width:600px;
+            display:block;
+            margin:0 auto;
+        }
+        h3 {
+            background: #fff;
+            color: #3498db;
+            font-size: 36px;
+            line-height: 100px;
+            margin: 10px;
+            padding: 2%;
+            position: relative;
+            text-align: center;
+        }
+        .action{
+            display:block;
+            margin:100px auto;
+            width:100%;
+            text-align:center;
+        }
+        .action a {
+            display:inline-block;
+            padding:5px 10px;
+            background:#f30;
+            color:#fff;
+            text-decoration:none;
+        }
+        .action a:hover{
+            background:#000;
+        }
+        .slider-for{
+            .slick-slide{
+                display: flex;
+                justify-content: center;
+            }
+
+        }
+        .slider-nav{
+            img{
+                width: 200px;
+                aspect-ratio: 1 / 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main">
+    <div class="slider slider-for">
+        <div><img src="https://images.pexels.com/photos/18296931/pexels-photo-18296931/free-photo-of-forest-on-hills-on-sea-coast.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></div>
+        <div><img src="https://images.pexels.com/photos/30135207/pexels-photo-30135207/free-photo-of-urban-streetview-of-classic-new-york-architecture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" srcset=""></div>
+        <div><img src=https://images.pexels.com/photos/29307940/pexels-photo-29307940/free-photo-of-st-nicholas-church-in-villach-during-fall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" srcset=""></div>
+        <div><img src="https://images.pexels.com/photos/18296931/pexels-photo-18296931/free-photo-of-forest-on-hills-on-sea-coast.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></div>
+        <div><img src="https://images.pexels.com/photos/30135207/pexels-photo-30135207/free-photo-of-urban-streetview-of-classic-new-york-architecture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" srcset=""></div>
+        <div><img src=https://images.pexels.com/photos/29307940/pexels-photo-29307940/free-photo-of-st-nicholas-church-in-villach-during-fall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" srcset=""></div>
+    </div>
+    <div class="slider slider-nav">
+        <div><img src="https://images.pexels.com/photos/18296931/pexels-photo-18296931/free-photo-of-forest-on-hills-on-sea-coast.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></div>
+        <div><img src="https://images.pexels.com/photos/30135207/pexels-photo-30135207/free-photo-of-urban-streetview-of-classic-new-york-architecture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" srcset=""></div>
+        <div><img src=https://images.pexels.com/photos/29307940/pexels-photo-29307940/free-photo-of-st-nicholas-church-in-villach-during-fall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" srcset=""></div>
+        <div><img src="https://images.pexels.com/photos/18296931/pexels-photo-18296931/free-photo-of-forest-on-hills-on-sea-coast.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></div>
+        <div><img src="https://images.pexels.com/photos/30135207/pexels-photo-30135207/free-photo-of-urban-streetview-of-classic-new-york-architecture.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" srcset=""></div>
+        <div><img src=https://images.pexels.com/photos/29307940/pexels-photo-29307940/free-photo-of-st-nicholas-church-in-villach-during-fall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" srcset=""></div>
+    </div>
+    <div class="action">
+        <a href="#" data-slide="1">go to slide 1</a>
+        <a href="#" data-slide="2">go to slide 2</a>
+        <a href="#" data-slide="3">go to slide 3</a>
+        <a href="#" data-slide="4">go to slide 4</a>
+        <a href="#" data-slide="5">go to slide 5</a>
+    </div>
+</div>
+
+
+<script>
+
+    $('.slider-for').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    asNavFor: '.slider-nav'
+});
+$('.slider-nav').slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    asNavFor: '.slider-for',
+    dots: true,
+    focusOnSelect: true
+});
+
+$('a[data-slide]').click(function(e) {
+    e.preventDefault();
+    var slideno = $(this).data('slide');
+    $('.slider-nav').slick('slickGoTo', slideno - 1);
+});
+
+</script>
+
+
+</body>
+</html>
